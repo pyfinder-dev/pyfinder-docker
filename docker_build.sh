@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # =============================================================================================
-# SeisComP Docker Build Script
+# PyFinder Docker Build Script
 # =============================================================================================
 #
-# This script builds a Docker image for the SeisComP project using Docker's build or buildx
+# This script builds a Docker image for the PyFinder project using Docker's build or buildx
 # commands. It detects the host OS and architecture to determine if buildx is needed,
 # especially for Apple Silicon Macs requiring cross-platform builds.
 #

@@ -23,12 +23,6 @@ CONTAINER_NAME="pyfinderdocker"
 docker stop $CONTAINER_NAME 2>/dev/null || true
 docker rm $CONTAINER_NAME 2>/dev/null || true
 
-# If exists, remove the database to have a clean state.
-FILE="$(pwd)/host_shared/seiscomp_db/db.sqlite"
-
-if [ -f "$FILE" ]; then
-  rm "$FILE"
-fi
 
 # Prepare host-side output directories for products
 HOST_OUT="$(pwd)/host_shared/docker-output"
@@ -40,7 +34,6 @@ docker run -d \
   --platform linux/amd64 \
   -u sysop \
   -w /home/sysop \
-  -e SEISCOMP_ROOT=/opt/seiscomp \
   -v "$(pwd)/host_shared:/home/sysop/host_shared" \
   -v "$HOST_OUT/shakemap:/home/sysop/shakemap_profiles/default/data" \
   -v "$HOST_OUT/PyFinder-output:/home/sysop/pyfinder/pyfinder/output" \
@@ -49,5 +42,3 @@ docker run -d \
 
 
 echo "Container '$CONTAINER_NAME' is running in the background."
-# View logs just in case
-docker logs $CONTAINER_NAME
