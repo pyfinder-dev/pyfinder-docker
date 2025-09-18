@@ -40,8 +40,8 @@ RUN sm_profile -c default -a
 # get pyfinder to wrap FinDer in python
 RUN git clone https://github.com/pyfinder-dev/pyfinder.git /home/sysop/pyfinder
 
-# get the parametric web series clients under pyfinder - paramws-clients
-RUN git clone https://github.com/pyfinder-dev/paramws-clients.git /home/sysop/pyfinder/paramwsclients
+# get the parametric web services clients paramws-clients
+RUN git clone https://github.com/pyfinder-dev/paramws-clients.git /home/sysop/paramws-clients
 
 # bring in ShakeMap patches into the image
 # COPY host_shared /home/sysop/host_shared
@@ -65,6 +65,9 @@ RUN rm -rf /root/.cache/pip \
     && rm -rf /tmp/shakemap_patches
 
 USER sysop
+
+# Install local paramws-clients package in editable mode
+RUN python3.9 -m pip install -e /home/sysop/paramws-clients
 
 # Install python packages
 RUN python3.9 -m pip install psycopg2 xmltodict filelock pandas geopandas geojson shapely tornado
