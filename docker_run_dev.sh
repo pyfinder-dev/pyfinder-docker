@@ -62,12 +62,12 @@ docker run -d \
   bash -lc "tail -f /dev/null"
 
 
-# Dev installs (editable) so changes in mounted sources are reflected immediately
-if docker exec $CONTAINER_NAME test -d /home/sysop/paramws-clients; then
-  docker exec -it $CONTAINER_NAME bash -lc "python3.9 -m pip install -e /home/sysop/paramws-clients || true"
-fi
-if docker exec $CONTAINER_NAME test -d /home/sysop/pyfinder; then
-  docker exec -it $CONTAINER_NAME bash -lc "python3.9 -m pip install -e /home/sysop/pyfinder || true"
-fi
+# # Dev installs (editable) so changes in mounted sources are reflected immediately
+# if docker exec $CONTAINER_NAME test -d /home/sysop/paramws-clients; then
+#   docker exec -it $CONTAINER_NAME bash -lc "python3.9 -m pip install -e /home/sysop/paramws-clients || true"
+# fi
+# if docker exec $CONTAINER_NAME test -d /home/sysop/pyfinder; then
+#   docker exec -it $CONTAINER_NAME bash -lc "python3.9 -m pip install -e /home/sysop/pyfinder || true"
+# fi
 
 echo "Container '$CONTAINER_NAME' is running in the background."
