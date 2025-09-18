@@ -41,7 +41,10 @@ cd pyfinder-docker
 ./docker_build.sh
 
 # 3) Start the container (post_start_setup must be run manually)
-./docker_run.sh
+./docker_run_op.sh
+
+# or, if you are a developer (note that mount paths might need adjustment dependng on your local setup)
+./docker_run_dev.sh
 ```
 
 ---
@@ -77,10 +80,17 @@ IMAGE_TAG=myrepo/pyfinderdocker:test DOCKERFILE=Dockerfile.myversion ./docker_bu
 Start the container using the run helper:
 
 ```bash
-./docker_run.sh
+./docker_run_op.sh
 ```
 
-This will
+If you are actively developing, you will probably want to mount your own source code 
+paths inside the container. Then use:
+
+```bash
+./docker_run_dev.sh
+```
+
+Both of these scripts will
 1. Stop/remove any existing `pyfinder` container.
 2. Prepare host-side output directories under `host_shared/docker-output/`.
 3. Launch the container with all required **volume mappings** and environment settings.
@@ -108,6 +118,11 @@ All important paths are mounted back to the **host** so you can inspect results 
 - **PyFinder outputs** → also goes to `host_shared/docker-output/shakemap/` and `host_shared/docker-output/FinDer-output/`
 
 These directories persist even if you remove the container.
+
+And for `dev` version, these paths will be mounted from you localhost (in addition to the ones above):
+
+- **pyfinder** → `../pyfinder` as `/home/sysop/pyfinder` inside the container
+- **paramws-clients** → `../paramws-clients` as `/home/sysop/paramws-clients` inside the container
 
 ---
 
